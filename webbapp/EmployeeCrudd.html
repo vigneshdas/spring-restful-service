@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("p").click(function(){
+        $(this).hide();
+    });
+});
+
+
+function searchViaAjax() {
+
+	var search = {}
+	search["username"] = $("#username").val();
+	search["email"] = $("#email").val();
+
+	$.ajax({
+		type : "POST",
+		contentType : "application/json",
+		url : "${home}search/api/getSearchResult",
+		data : JSON.stringify(search),
+		dataType : 'json',
+		timeout : 100000,
+		success : function(data) {
+			console.log("SUCCESS: ", data);
+			display(data);
+		},
+		error : function(e) {
+			console.log("ERROR: ", e);
+			display(e);
+		},
+		done : function(e) {
+			console.log("DONE");
+			enableSearchButton(true);
+		}
+	});
+
+}
+</head>
+<body>
+
+
+
+
+<input type="button" value="add Employee" onclick="callAjaxAddFunction();"
+
+</body>
+</html>
